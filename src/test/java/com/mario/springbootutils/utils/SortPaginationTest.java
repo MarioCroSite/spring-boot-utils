@@ -75,6 +75,9 @@ public class SortPaginationTest {
         assertThat(resultPage.getTotalElements()).isEqualTo(5);
     }
 
-    public record Address(String city, String country) {}
-    public record Person(String name, int age, Address address) {}
+    public record Address(String city, String country) {
+    }
+
+    public record Person(String name, int age, Address address) {
+    }
 }
