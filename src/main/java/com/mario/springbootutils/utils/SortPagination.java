@@ -71,6 +71,7 @@ import static java.util.Optional.ofNullable;
  *
  * @param <T> The type of elements in the dataset that will be sorted and paginated.
  */
+
 public class SortPagination<T> {
     private final Function<T, ? extends Comparable<?>> keyExtractor;
     private final boolean ascending;
@@ -108,8 +109,12 @@ public class SortPagination<T> {
                 .toList();
     }
 
-    public static <T> Page<T> sortAndPageData(List<T> dataList, List<SortPagination<T>> sortOrders, Pageable pageable) {
-        final var comparator = sortOrders.stream()
+    public static <T> Page<T> sortAndPageData(
+            List<T> dataList,
+            List<SortPagination<T>> sortPagination,
+            Pageable pageable) {
+
+        final var comparator = sortPagination.stream()
                 .map(SortPagination::getComparator)
                 .reduce(Comparator::thenComparing)
                 .orElse((t1, t2) -> 0);
